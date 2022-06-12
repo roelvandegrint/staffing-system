@@ -35,7 +35,7 @@ jobs:
         with:
           push: true
           tags: roelvandegrint.azurecr.io/cont-staffing-system-frontend:${{ github.sha }}
-          file: ./Dockerfile
+          file: ./frontend/Server/Dockerfile
           context: ./
 
   deploy:
