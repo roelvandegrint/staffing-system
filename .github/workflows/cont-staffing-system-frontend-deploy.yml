@@ -7,7 +7,7 @@ on:
     branches: [main]
     paths:
       - "/frontend/**"
-      - ".github/workflows/cont-staffing-system-frontend.yml"
+      - ".github/workflows/cont-staffing-system-frontend-deploy.yml"
 
   # Allow mannually trigger
   workflow_dispatch:
