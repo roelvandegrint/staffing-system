@@ -4,14 +4,13 @@ name: Trigger auto deployment for cont-staffing-system-frontend
 on:
   # Automatically trigger it when detected changes in repo
   push:
-    branches: 
-      [ initial_bicep ]
+    branches: [devops-ci-cd]
     paths:
-    - '**'
-    - '.github/workflows/cont-staffing-system-frontend-AutoDeployTrigger-32448ec8-98f7-40d7-a8ab-3519b05adf74.yml'
+      - "**"
+      - ".github/workflows/cont-staffing-system-frontend-AutoDeployTrigger-32448ec8-98f7-40d7-a8ab-3519b05adf74.yml"
 
-  # Allow mannually trigger 
-  workflow_dispatch:      
+  # Allow mannually trigger
+  workflow_dispatch:
 
 jobs:
   build:
@@ -39,17 +38,15 @@ jobs:
           file: ./Dockerfile
           context: ./
 
-
   deploy:
     runs-on: ubuntu-latest
     needs: build
-    
+
     steps:
       - name: Azure Login
         uses: azure/login@v1
         with:
           creds: ${{ secrets.CONTSTAFFINGSYSTEMFRONTEND_AZURE_CREDENTIALS }}
-
 
       - name: Deploy to containerapp
         uses: azure/CLI@v1
