@@ -4,7 +4,7 @@ name: Trigger auto deployment for cont-staffing-system-frontend
 on:
   # Automatically trigger it when detected changes in repo
   push:
-    branches: [main]
+    branches: [bug/frontend-workflow-trigger]
     paths:
       - "/frontend/**"
       - ".github/workflows/cont-staffing-system-frontend-deploy.yml"
