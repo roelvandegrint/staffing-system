@@ -11,9 +11,10 @@ on:
   push:
     branches: [main]
     paths:
-      - '/frontend/**'
+      - 'frontend/**'
       - '.github/workflows/cont-staffing-frontend-deploy.yml'
-      - '/azure/frontend*'
+      - 'azure/container-app.bicep'
+      - 'azure/frontend*'
 
   # Allow mannually trigger
   workflow_dispatch:

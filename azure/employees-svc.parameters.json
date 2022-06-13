@@ -11,6 +11,9 @@
         "container_name": {
             "value": "employees-svc"
         },
+        "dapr_app_id": {
+            "value": "employees-svc"
+        },
         "ingress_external": {
             "value": false
         },
