@@ -9,7 +9,7 @@ env:
 on:
   # Automatically trigger it when detected changes in repo
   push:
-    branches: [add-frontend-iac]
+    branches: [main]
     paths:
       - "/frontend/**"
       - ".github/workflows/cont-staffing-frontend-deploy.yml"
