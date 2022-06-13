@@ -10,7 +10,7 @@ param container_registry_uri string
 param container_env array = []
 param ingress_external bool
 param ingress_target_port int
-param location string
+param location string = resourceGroup().location
 
 resource container_app_environment 'Microsoft.App/managedEnvironments@2022-03-01' existing = {
   name: container_app_environment_name
