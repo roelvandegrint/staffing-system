@@ -11,6 +11,9 @@
         "container_name": {
             "value": "frontend"
         },
+        "dapr_app_id": {
+            "value": "frontend"
+        },
         "ingress_external": {
             "value": true
         },

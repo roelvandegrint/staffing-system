@@ -7,6 +7,7 @@ param container_registry_username string
 @secure()
 param container_registry_password string
 param container_registry_uri string
+param dapr_app_id string
 param ingress_external bool
 param ingress_target_port int
 param location string = resourceGroup().location
@@ -28,5 +29,6 @@ module container_app './container-app.bicep' = {
     ingress_external: ingress_external
     ingress_target_port: ingress_target_port
     location: location
+    dapr_app_id: dapr_app_id
   }
 }

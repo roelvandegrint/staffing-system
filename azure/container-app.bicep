@@ -8,6 +8,7 @@ param container_registry_username string
 param container_registry_password string
 param container_registry_uri string
 param container_env array = []
+param dapr_app_id string
 param ingress_external bool
 param ingress_target_port int
 param location string = resourceGroup().location
@@ -31,7 +32,7 @@ resource containerapp 'Microsoft.App/containerApps@2022-03-01' = {
       }
       dapr: {
         enabled: true
-        appId: container_app_name
+        appId: dapr_app_id
         appProtocol: 'http'
         appPort: 80
       }
