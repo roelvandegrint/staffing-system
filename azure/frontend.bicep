@@ -36,7 +36,7 @@ module container_app './container-app.bicep' = {
     container_env: [
       {
         name: 'EmployeesServiceBaseUri'
-        value: employees_service.properties.configuration.ingress.fqdn
+        value: 'https//${employees_service.properties.configuration.ingress.fqdn}'
       }
     ]
   }
