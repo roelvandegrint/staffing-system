@@ -4,7 +4,7 @@ name: Deploy Employees Svc
 on:
   # Automatically trigger it when detected changes in repo
   push:
-    branches: [implement-employees-svc-index-call]
+    branches: [main]
     paths:
       - "/employees-service/**"
       - ".github/workflows/cont-staffing-employees-service-deploy.yml"
