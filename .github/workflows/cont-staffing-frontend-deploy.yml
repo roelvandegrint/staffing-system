@@ -9,11 +9,11 @@ env:
 on:
   # Automatically trigger it when detected changes in repo
   push:
-    branches: [dapr-service-invocation]
+    branches: [main]
     paths:
-      - '/frontend/**'
+      - 'frontend/**'
       - '.github/workflows/cont-staffing-frontend-deploy.yml'
-      - '/azure/frontend*'
+      - 'azure/frontend*'
 
   # Allow mannually trigger
   workflow_dispatch:
