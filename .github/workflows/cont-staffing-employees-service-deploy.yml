@@ -2,7 +2,7 @@ name: Deploy Employees Svc
 
 env:
   CONTAINER_REGISTRY: roelvandegrint.azurecr.io
-  CONTAINER_IMAGE: $CONTAINER_REGISTRY/cont-staffing-employees-svc:${{ github.sha }}
+  CONTAINER_IMAGE: cont-staffing-employees-svc:${{ github.sha }}
   RESOURCE_GROUP: rg-staffing-system
 
 # When this action will be executed
@@ -42,7 +42,7 @@ jobs:
       #   uses: docker/build-push-action@v2
       #   with:
       #     push: true
-      #     tags: ${{ CONTAINER_IMAGE }}
+      #     tags: $CONTAINER_REGSITRY/$CONTAINER_IMAGE
       #     file: ./employees-service/Dockerfile
       #     context: ./
 
@@ -64,7 +64,7 @@ jobs:
   #         template: ./azure/employees-svc.bicep
   #         parameters: | 
   #           ./azure/employees-svc.parameters.json
-  #           container_image=${{ env.CONTAINER_IMAGE }}
+  #           container_image=$CONTAINER_REGSITRY/$CONTAINER_IMAGE
   #           container_registry_uri=${{ env.CONTAINER_REGISTRY }}
   #           container_registry_username=${{ secrets.CONTSTAFFINGSYSTEMFRONTEND_REGISTRY_USERNAME }}
   #           container_registry_password=${{ secrets.CONTSTAFFINGSYSTEMFRONTEND_REGISTRY_PASSWORD }}
