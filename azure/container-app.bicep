@@ -7,9 +7,10 @@ param container_registry_username string
 @secure()
 param container_registry_password string
 param container_registry_uri string
+param container_env array = []
 param ingress_external bool
 param ingress_target_port int
-param location string = resourceGroup().location
+param location string
 
 // TODO: Provide container apps environment name from pipeline variables
 resource container_app_environment 'Microsoft.App/managedEnvironments@2022-03-01' existing = {
@@ -41,14 +42,14 @@ resource containerapp 'Microsoft.App/containerApps@2022-03-01' = {
           username: container_registry_username
           passwordSecretRef: 'container-registry-password'
         }
-      ]
+      ]      
     }
     template: {
       containers: [
         {          
           image: container_image
           name: container_name
-          env: []
+          env: container_env
           resources: {
             cpu: json('0.25')
             memory: '0.5Gi'

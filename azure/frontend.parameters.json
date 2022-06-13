@@ -1,0 +1,24 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "container_app_name": {
+            "value": "cont-staffing-frontend"
+        },
+        "container_app_environment_name": {
+            "value": "contenv-staffing-system"
+        },
+        "container_name": {
+            "value": "frontend"
+        },
+        "employees_svc_container_app_name": {
+            "value": "cont-staffing-employees-svc"
+        },
+        "ingress_external": {
+            "value": true
+        },
+        "ingress_target_port": {
+            "value": 80
+        }
+    }
+}
