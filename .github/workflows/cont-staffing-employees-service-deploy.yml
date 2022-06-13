@@ -11,8 +11,10 @@ on:
   push:
     branches: [main]
     paths:
-      - "/employees-service/**"
-      - ".github/workflows/cont-staffing-employees-service-deploy.yml"
+      - 'employees-service/**'
+      - '.github/workflows/cont-staffing-employees-service-deploy.yml'
+      - 'azure/container-app.bicep'
+      - 'azure/employees-svc*'
 
   # Allow mannually trigger
   workflow_dispatch:
