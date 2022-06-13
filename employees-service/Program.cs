@@ -16,7 +16,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var employtees = new[]
+var employees = new[]
 {
     new Employee("Roel", "van de", "Grint", "16-01-1985"),
     new Employee("Arjan", null, "Nieuwenhuis", null),
@@ -24,7 +24,7 @@ var employtees = new[]
     new Employee("Vincent",null,"Keizer", null)
 };
 
-app.MapGet("/", () => employtees);
+app.MapGet("/", () => employees);
 
 app.Run();
 

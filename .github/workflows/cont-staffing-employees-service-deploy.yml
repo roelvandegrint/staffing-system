@@ -9,7 +9,7 @@ env:
 on:
   # Automatically trigger it when detected changes in repo
   push:
-    branches: [main]
+    branches: [dapr-service-invocation]
     paths:
       - 'employees-service/**'
       - '.github/workflows/cont-staffing-employees-service-deploy.yml'
