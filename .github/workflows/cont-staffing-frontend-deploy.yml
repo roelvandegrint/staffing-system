@@ -4,7 +4,7 @@ name: Deploy Frontend
 on:
   # Automatically trigger it when detected changes in repo
   push:
-    branches: [implement-employees-svc-index-call]
+    branches: [main]
     paths:
       - "/frontend/**"
       - ".github/workflows/cont-staffing-frontend-deploy.yml"

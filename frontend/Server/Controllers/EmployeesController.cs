@@ -23,6 +23,6 @@ public class EmployeesController : ControllerBase
     {
         var client = _httpClientFactory.CreateClient();
         var employees = await client.GetFromJsonAsync<IEnumerable<Employee>>(_employeesServiceBaseUri);
-        return employees ?? new Employee[] { };
+        return employees ?? Array.Empty<Employee>();
     }
 }
