@@ -2,7 +2,7 @@ name: Deploy Employees Svc
 
 env:
   CONTAINER_REGISTRY: roelvandegrint.azurecr.io
-  CONTAINER_IMAGE: ${{ env.CONTAINER_REGISTRY }}/cont-staffing-employees-svc:${{ github.sha }}
+  CONTAINER_IMAGE: $CONTAINER_REGISTRY/cont-staffing-employees-svc:${{ github.sha }}
   RESOURCE_GROUP: rg-staffing-system
 
 # When this action will be executed
