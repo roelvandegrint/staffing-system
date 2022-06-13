@@ -19,7 +19,7 @@ app.UseHttpsRedirection();
 var employees = new[]
 {
     new Employee("Roel", "van de", "Grint", "16-01-1985"),
-    new Employee("Arjan", null, "Nieuwenhuis", null),
+    new Employee("Arjan", null, "Nieuwenhuis", "May 27th"),
     new Employee("Martijn","de","Graaf", null),
     new Employee("Vincent",null,"Keizer", null)
 };
