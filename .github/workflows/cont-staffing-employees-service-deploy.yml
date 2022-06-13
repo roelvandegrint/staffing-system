@@ -62,5 +62,7 @@ jobs:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
           resourceGroupName: ${{ env.RESOURCE_GROUP }}
           template: ./azure/employees-svc.bicep
-          parameters: ./azure/employees-svc.parameters.json container_image=roelvandegrint.azurecr.io/cont-staffing-employees-svc:f10c578f92e83c8231cb0ae15156d025caf4b0e2
+          parameters: |
+            ./azure/employees-svc.parameters.json
+            container_image=roelvandegrint.azurecr.io/cont-staffing-employees-svc:f10c578f92e83c8231cb0ae15156d025caf4b0e2
           failOnStdErr: false
