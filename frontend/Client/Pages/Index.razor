@@ -1,9 +1,47 @@
 ﻿@page "/"
+@using frontend.Shared
+@inject HttpClient Http
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Employees</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1>Employees</h1>
 
-Welcome to your new app.
+<p>These are the currently registered employees.</p>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+@if (employees == null)
+{
+    <p><em>Loading employees...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Prefix</th>
+                <th>LastName</th>
+                <th>Date of Birth</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var employee in employees)
+            {
+                <tr>
+                    <td>@employee.FirstName</td>
+                    <td>@employee.Prefix</td>
+                    <td>@employee.LastName</td>
+                    <td>@employee.DateOfBirth</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private Employee[]? employees;
+
+    protected override async Task OnInitializedAsync()
+    {
+        employees = await Http.GetFromJsonAsync<Employee[]>("Employees");
+    }
+}

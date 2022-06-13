@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+
+  employees-svc:
+    image: roelvandegrint/staffing-employee-svc:latest
+    build:
+      dockerfile: ./employees-service/Dockerfile
+      context: .
+    ports:
+      - '8081:80'
+
+  frontend:
+    image: roelvandegrint/staffing-frontend:latest
+    build:
+      dockerfile: ./frontend/Server/Dockerfile
+      context: .
+    ports:
+      - '8080:80'
+    environment:
+      EmployeesServiceBaseUri: http://employees-svc
