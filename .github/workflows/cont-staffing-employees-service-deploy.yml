@@ -64,8 +64,8 @@ jobs:
           template: ./azure/employees-svc.bicep
           parameters: >-
             ./azure/employees-svc.parameters.json
-            container_image=roelvandegrint.azurecr.io/cont-staffing-employees-svc:f10c578f92e83c8231cb0ae15156d025caf4b0e2
+            container_image=${{ env.CONTAINER_REGISTRY }}/${{ env.CONTAINER_IMAGE }}            
             container_registry_uri=${{ env.CONTAINER_REGISTRY }}
             container_registry_username=${{ secrets.CONTSTAFFINGSYSTEMFRONTEND_REGISTRY_USERNAME }}
-            container_registry_password=${{ secrets.CONTSTAFFINGSYSTEMFRONTEND_REGISTRY_PASSWORD }}
+            container_registry_password=${{ secrets.CONTSTAFFINGSYSTEMFRONTEND_REGISTRY_PASSWORD }}            
           failOnStdErr: false

@@ -1,11 +1,14 @@
 param container_app_name string
 param container_app_environment_name string
 param container_image string
+param container_name string
 @secure()
 param container_registry_username string
 @secure()
 param container_registry_password string
 param container_registry_uri string
+param ingress_external bool
+param ingress_target_port int
 param location string = resourceGroup().location
 
 // TODO: Provide container apps environment name from pipeline variables
@@ -23,8 +26,8 @@ resource containerapp 'Microsoft.App/containerApps@2022-03-01' = {
       activeRevisionsMode: 'single'
       ingress: {
         allowInsecure: false
-        external: false
-        targetPort: 80
+        external: ingress_external
+        targetPort: ingress_target_port
       }
       secrets: [
         {
@@ -44,7 +47,7 @@ resource containerapp 'Microsoft.App/containerApps@2022-03-01' = {
       containers: [
         {          
           image: container_image
-          name: 'employees-svc'
+          name: container_name
           env: []
           resources: {
             cpu: json('0.25')

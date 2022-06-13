@@ -7,6 +7,15 @@
         },
         "container_app_environment_name": {
             "value": "contenv-staffing-system"
+        },
+        "container_name": {
+            "value": "employees-svc"
+        },
+        "ingress_external": {
+            "value": false
+        },
+        "ingress_target_port": {
+            "value": 80
         }
     }
 }
