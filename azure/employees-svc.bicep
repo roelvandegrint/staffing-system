@@ -1,9 +1,16 @@
+param container_app_name string
+param container_app_environment_name string
+param container_image string
+@secure()
+param container_registry_username string
+@secure()
+param container_registry_password string
+param container_registry_uri string
 param location string = resourceGroup().location
-var container_app_name = 'cont-staffing-employees-svc'
 
 // TODO: Provide container apps environment name from pipeline variables
-resource environment 'Microsoft.App/managedEnvironments@2022-03-01' existing = {
-  name: 'contenv-staffing-system'
+resource container_app_environment 'Microsoft.App/managedEnvironments@2022-03-01' existing = {
+  name: container_app_environment_name
 }
 
 resource containerapp 'Microsoft.App/containerApps@2022-03-01' = {
@@ -11,7 +18,7 @@ resource containerapp 'Microsoft.App/containerApps@2022-03-01' = {
   location: location
   tags: {}
   properties: {
-    managedEnvironmentId: environment.id
+    managedEnvironmentId: container_app_environment.id
     configuration: {
       activeRevisionsMode: 'single'
       ingress: {
@@ -21,25 +28,23 @@ resource containerapp 'Microsoft.App/containerApps@2022-03-01' = {
       }
       secrets: [
         {
-          name: 'container-registry-password'
-          // TODO: Provide this secret from pipeline secrets
-          value: 'JP+1FoPfSgPBJemgQD84Pfh3f7+1tPhI'
+          name: 'container-registry-password'          
+          value: container_registry_password
         }
       ]
       registries: [
         {
-          server: 'roelvandegrint.azurecr.io'
-          username: 'roelvandegrint'
+          server: container_registry_uri
+          username: container_registry_username
           passwordSecretRef: 'container-registry-password'
         }
       ]
     }
     template: {
       containers: [
-        {
-          // TODO: Provide image from pipeline variables
-          image: 'roelvandegrint.azurecr.io/cont-staffing-employees-svc:a5209b874ccf3996ef9c5e00af33c068cd0084d9'
-          name: 'frontend'
+        {          
+          image: container_image
+          name: 'employees-svc'
           env: []
           resources: {
             cpu: json('0.25')
