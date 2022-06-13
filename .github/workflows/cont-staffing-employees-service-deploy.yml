@@ -39,7 +39,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: $CONTAINER_REGSITRY/$CONTAINER_IMAGE
+          tags: ${{ env.CONTAINER_REGISTRY }}/${{ env.CONTAINER_IMAGE }}
           file: ./employees-service/Dockerfile
           context: ./
 
@@ -57,11 +57,11 @@ jobs:
         uses: azure/arm-deploy@v1
         with:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
-          resourceGroupName: ${{ RESOURCE_GROUP }}
+          resourceGroupName: ${{ env.RESOURCE_GROUP }}
           template: ./azure/employees-svc.bicep
           parameters: | 
             ./azure/employees-svc.parameters.json
-            container_image=$CONTAINER_REGSITRY/$CONTAINER_IMAGE
+            container_image=${{ env.CONTAINER_REGISTRY }}/${{ env.CONTAINER_IMAGE }}
             container_registry_uri=${{ env.CONTAINER_REGISTRY }}
             container_registry_username=${{ secrets.CONTSTAFFINGSYSTEMFRONTEND_REGISTRY_USERNAME }}
             container_registry_password=${{ secrets.CONTSTAFFINGSYSTEMFRONTEND_REGISTRY_PASSWORD }}
