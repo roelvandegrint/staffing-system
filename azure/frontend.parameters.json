@@ -11,9 +11,6 @@
         "container_name": {
             "value": "frontend"
         },
-        "employees_svc_container_app_name": {
-            "value": "cont-staffing-employees-svc"
-        },
         "ingress_external": {
             "value": true
         },

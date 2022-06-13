@@ -29,6 +29,12 @@ resource containerapp 'Microsoft.App/containerApps@2022-03-01' = {
         external: ingress_external
         targetPort: ingress_target_port
       }
+      dapr: {
+        enabled: true
+        appId: container_app_name
+        appProtocol: 'http'
+        appPort: 80
+      }
       secrets: [
         {
           name: 'container-registry-password'          
