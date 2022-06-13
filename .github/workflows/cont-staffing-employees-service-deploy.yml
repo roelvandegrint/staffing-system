@@ -1,13 +1,20 @@
 name: Deploy Employees Svc
 
+env:
+  CONTAINER_REGISTRY: roelvandegrint.azurecr.io
+  CONTAINER_IMAGE: cont-staffing-employees-svc:${{ github.sha }}
+  RESOURCE_GROUP: rg-staffing-system
+
 # When this action will be executed
 on:
   # Automatically trigger it when detected changes in repo
   push:
     branches: [implement-employees-svc-index-call]
     paths:
-      - "/employees-service/**"
-      - ".github/workflows/cont-staffing-employees-service-deploy.yml"
+      - 'employees-service/**'
+      - '.github/workflows/cont-staffing-employees-service-deploy.yml'
+      - 'azure/container-app.bicep'
+      - 'azure/employees-svc*'
 
   # Allow mannually trigger
   workflow_dispatch:
@@ -34,7 +41,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: roelvandegrint.azurecr.io/cont-staffing-employees-svc:${{ github.sha }}
+          tags: ${{ env.CONTAINER_REGISTRY }}/${{ env.CONTAINER_IMAGE }}
           file: ./employees-service/Dockerfile
           context: ./
 
@@ -43,15 +50,24 @@ jobs:
     needs: build
 
     steps:
+      - name: Checkout to the branch
+        uses: actions/checkout@v2
+
       - name: Azure Login
         uses: azure/login@v1
         with:
           creds: ${{ secrets.CONTSTAFFINGSYSTEMFRONTEND_AZURE_CREDENTIALS }}
 
-      - name: Deploy to containerapp
-        uses: azure/CLI@v1
+      - name: Deploy infra
+        uses: azure/arm-deploy@v1
         with:
-          inlineScript: |
-            az config set extension.use_dynamic_install=yes_without_prompt
-            az containerapp registry set -n cont-staffing-employees-svc -g rg-staffing-system --server roelvandegrint.azurecr.io --username  ${{ secrets.CONTSTAFFINGSYSTEMFRONTEND_REGISTRY_USERNAME }} --password ${{ secrets.CONTSTAFFINGSYSTEMFRONTEND_REGISTRY_PASSWORD }}
-            az containerapp update -n cont-staffing-employees-svc -g rg-staffing-system --image roelvandegrint.azurecr.io/cont-staffing-employees-svc:${{ github.sha }}
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+          resourceGroupName: ${{ env.RESOURCE_GROUP }}
+          template: ./azure/container-app.bicep
+          parameters: >-
+            ./azure/employees-svc.parameters.json
+            container_image=${{ env.CONTAINER_REGISTRY }}/${{ env.CONTAINER_IMAGE }}            
+            container_registry_uri=${{ env.CONTAINER_REGISTRY }}
+            container_registry_username=${{ secrets.CONTSTAFFINGSYSTEMFRONTEND_REGISTRY_USERNAME }}
+            container_registry_password=${{ secrets.CONTSTAFFINGSYSTEMFRONTEND_REGISTRY_PASSWORD }}            
+          failOnStdErr: false
